@@ -1,26 +1,38 @@
 import { useState } from 'react'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import ToggleSwitch from './components/ToggleSwitch'
+import WorkGrid from './components/WorkGrid'
+import About from './components/About'
+import Contact from './components/Contact'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [mode, setMode] = useState('team')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-gradient-to-b from-white via-white to-white dark:from-[#0b0b10] dark:via-[#0b0b10] dark:to-[#0b0b10] text-gray-900 dark:text-white">
+      <Navbar />
+      <Hero />
+
+      <main className="relative z-10">
+        <section className="pt-6">
+          <div className="mx-auto max-w-7xl px-4 flex items-center justify-between">
+            <h2 className="text-lg font-semibold tracking-tight text-gray-800 dark:text-gray-200">View mode</h2>
+            <ToggleSwitch onChange={setMode} />
+          </div>
+        </section>
+
+        <WorkGrid mode={mode} />
+        <About />
+        <Contact />
+      </main>
+
+      <footer className="py-12">
+        <div className="mx-auto max-w-7xl px-4 text-sm text-gray-600 dark:text-gray-400 flex items-center justify-between">
+          <p>© {new Date().getFullYear()} Design Collective — All rights reserved.</p>
+          <a href="/test" className="hover:underline">System Check</a>
         </div>
-      </div>
+      </footer>
     </div>
   )
 }
